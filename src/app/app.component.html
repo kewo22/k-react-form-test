@@ -17,15 +17,33 @@
   </select>
 
 	<input formControlName="text" />
-  <br>
+	<br>
 	<input formControlName="age" type="number" placeholder="age" />
 
 	<br>
 
-	<button type="button" (click)="save()" [disabled]="!contactForm.valid">Save</button>
-	<button type="button" (click)="revert()" [disabled]="contactForm.pristine">
+	<br>
+
+	<h5>Pass</h5>
+	<div formGroupName="password" novalidate>
+		<input formControlName="password" />
+		<input formControlName="confirmPassword" />
+	</div>
+
+
+		<br>
+
+		<br>
+
+		<button type="button" (click)="save()" [disabled]="!contactForm.valid">Save</button>
+		<button type="button" (click)="revert()" [disabled]="contactForm.pristine">
     Revert
   </button>
 </form>
 
 {{this.contactForm.controls.age.valid }}
+<br>
+{{this.contactForm.controls.age.hasError('ageLimit') }}
+
+<br>
+<span>PW ERR</span> -- {{this.contactForm.controls.password.controls['confirmPassword'].touched && this.contactForm.controls.password.controls['confirmPassword'].hasError('NoPassswordMatch')}}
