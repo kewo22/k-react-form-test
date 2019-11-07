@@ -17,13 +17,15 @@
   </select>
 
 	<input formControlName="text" />
+  <br>
+	<input formControlName="age" type="number" placeholder="age" />
 
 	<br>
 
-	<button type="button" (click)="save()" [disabled]="contactForm.pristine">Save</button>
+	<button type="button" (click)="save()" [disabled]="!contactForm.valid">Save</button>
 	<button type="button" (click)="revert()" [disabled]="contactForm.pristine">
     Revert
   </button>
 </form>
 
-{{this.contactForm.controls.personalData.controls.email.valid }}
+{{this.contactForm.controls.age.valid }}

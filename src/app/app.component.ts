@@ -3,7 +3,9 @@ import {
   FormGroup,
   FormControl,
   FormBuilder,
-  Validators
+  Validators,
+  ValidatorFn,
+  AbstractControl
 } from "@angular/forms";
 
 @Component({
@@ -46,7 +48,8 @@ export class AppComponent implements OnInit {
         country: ""
       }),
       requestType: "",
-      text: ""
+      text: "",
+      age: ["", Validators.compose([this.ageLimitValidator(18, 60)])]
     });
   }
 
@@ -56,6 +59,21 @@ export class AppComponent implements OnInit {
       requestType: "",
       text: ""
     });
+  }
+
+  ageLimitValidator(minAge: number, maxAge: number): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      // if control value is not null and is a number
+      if (control.value !== null) {
+        // return null  if it's in between the minAge and maxAge and is A valid Number
+        return isNaN(control.value) || // checks if its a valid number
+        control.value < minAge || // checks if its below the minimum age
+          control.value > maxAge // checks if its above the maximum age
+          ? { ageLimit: true } // return this incase of error
+          : null; // there was not error
+      }
+      return null;
+    };
   }
 
   save(): void {
@@ -70,6 +88,7 @@ class ContactRequest {
   personalData: PersonalData;
   requestType: any = "";
   text: string = "";
+  age: number = 0;
 }
 
 class PersonalData {
