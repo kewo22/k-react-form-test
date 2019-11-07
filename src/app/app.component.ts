@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
       requestType: "",
       text: "",
       age: ["", Validators.compose([this.ageLimitValidator(18, 60)])],
-      password: this.formBuilder.group(
+      passwordG: this.formBuilder.group(
         {
           password: new FormControl(
             "",
@@ -83,6 +83,7 @@ export class AppComponent implements OnInit {
     // compare is the password math
     if (password !== confirmPassword) {
       // if they don't match, set an error in our confirmPassword form control
+      // control.get("password").setErrors({ NoPassswordMatch: true });
       control.get("confirmPassword").setErrors({ NoPassswordMatch: true });
     }
   }
@@ -126,7 +127,7 @@ class PersonalData {
   mobile: string = "";
   country: string = "";
   age: number = 0;
-  password: Password;
+  passwordG: Password;
 
   constructor(email: string) {
     this.email = email;

@@ -25,7 +25,7 @@
 	<br>
 
 	<h5>Pass</h5>
-	<div formGroupName="password" novalidate>
+	<div formGroupName="passwordG" novalidate>
 		<input formControlName="password" />
 		<input formControlName="confirmPassword" />
 	</div>
@@ -46,4 +46,6 @@
 {{this.contactForm.controls.age.hasError('ageLimit') }}
 
 <br>
-<span>PW ERR</span> -- {{this.contactForm.controls.password.controls['confirmPassword'].touched && this.contactForm.controls.password.controls['confirmPassword'].hasError('NoPassswordMatch')}}
+<span>PW ERR</span> -- {{ this.contactForm.controls.passwordG.controls['confirmPassword'].hasError('NoPassswordMatch')}}
+<br>
+<!-- <span>PW ERR</span> -- {{this.contactForm.controls.passwordG.controls['password'].hasError('NoPassswordMatch')}} -->
